@@ -1,4 +1,6 @@
 require_relative "piece.rb"
+require "colorize"
+
 
 class Board
 
@@ -39,6 +41,10 @@ class Board
     end
   end
 
+  def in_bounds?(final_pos)
+    final_pos.all? {|el| el.between?(0,7) }
+  end
+
   def valid_move?(start_pos, end_pos)
 
   end
@@ -46,5 +52,4 @@ class Board
 end
 
 class InvalidMove < StandardError
-
 end
