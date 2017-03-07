@@ -1,6 +1,7 @@
 require_relative "piece.rb"
 require "colorize"
 require "byebug"
+require_relative "cursor"
 
 
 class Board
@@ -34,7 +35,8 @@ class Board
   def find_piece(pos)
     CHESS_PIECES.each do |piece, pos_array|
       if pos_array.include?(pos)
-        return piece.new(:red, pos, self)
+        player_side = pos.first > 2 ? :blue : :red
+        return piece.new(player_side, pos, self)
       end
     end
   end
@@ -58,9 +60,12 @@ class Board
     raise InvalidMove.new("That is not a valid ending position!") unless valid_move?(start_pos, end_pos)
 
     if self[end_pos].is_a?(NullPiece)
+      self[start_pos].pos, self[end_pos].pos = end_pos, start_pos
       self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
       #If self[end_pos].color == "enemy color" ???
     end
+
+
   end
 
   def in_bounds?(final_pos)
@@ -68,7 +73,10 @@ class Board
   end
 
   def valid_move?(start_pos, end_pos)
+    piece = self[start_pos]
+    piece_moves = piece.moves
 
+    piece_moves.include?(end_pos)
   end
 
 end

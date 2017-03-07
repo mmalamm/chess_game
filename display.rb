@@ -58,10 +58,10 @@ end
 
 display = Display.new
 display.render
-p "#{display.board[[0,4]]}: #{display.board[[0,4]].moves}"
-p "#{display.board[[0,6]]}: #{display.board[[0,6]].moves}"
-p "#{display.board[[0,0]]}: #{display.board[[0,0]].moves}"
+# p "#{display.board[[0,4]]}: #{display.board[[0,4]].moves}"
+# p "#{display.board[[0,6]]}: #{display.board[[0,6]].moves}"
+# p "#{display.board[[0,0]]}: #{display.board[[0,0]].moves}"
 
-# display.run
+display.run
 
 # display.posit

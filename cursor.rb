@@ -41,9 +41,6 @@ class Cursor
     @selected = false
   end
 
-  def toggle_selected
-    @selected = @selected ? false : true
-  end
 
   def get_input
     key = KEYMAP[read_char]
@@ -88,12 +85,23 @@ class Cursor
     when :return, :space
       cursor_pos
       toggle_selected
+
+      @current_selected_pos = cursor_pos if @selected
+
+      unless @selected
+        @next_selected_pos = cursor_pos
+        board.move_piece(@current_selected_pos, @next_selected_pos)
+      end
     when :left, :right, :up, :down
       diff = MOVES[key]
       update_pos(diff)
       nil
     end
 
+  end
+
+  def toggle_selected
+    @selected = @selected ? false : true
   end
 
   def update_pos(diff)
@@ -104,4 +112,5 @@ class Cursor
       @cursor_pos = [first_el, second_el]
     end
   end
+
 end

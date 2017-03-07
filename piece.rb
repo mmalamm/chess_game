@@ -6,10 +6,10 @@ class Piece
   attr_reader :symbol, :color, :board
   attr_accessor :pos
 
-  def initialize(color, pos, board)
+  def initialize(color = :red, pos, board)
     @moves = []
     @symbol = :P
-    @color = :red
+    @color = color
     @pos = pos
     @board = board
   end
@@ -41,6 +41,11 @@ class NullPiece < Piece
 end
 
 class Pawn < Piece
+  include Stepable
+
+  def initialize(*args)
+    super
+  end
 end
 
 class King < Piece
@@ -78,9 +83,6 @@ class Rook < Piece
     horizontal_dirs
   end
 end
-#
-# r = Rook.new([0,0], :black)
-# r.moves
 
 class Queen < Piece
   include Slideable
