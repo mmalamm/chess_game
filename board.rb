@@ -62,7 +62,10 @@ class Board
     if self[end_pos].is_a?(NullPiece)
       self[start_pos].pos, self[end_pos].pos = end_pos, start_pos
       self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
-      #If self[end_pos].color == "enemy color" ???
+    elsif self[end_pos].color != self[start_pos].color
+      self[start_pos].pos, self[end_pos].pos = end_pos, start_pos
+
+      self[start_pos], self[end_pos] = NullPiece.instance, self[start_pos]
     end
 
 

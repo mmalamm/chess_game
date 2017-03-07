@@ -33,8 +33,10 @@ module Slideable
 
       next_pos = [current_xcoord, current_ycoord]
 
-      if current_xcoord.between?(0,7) && current_ycoord.between?(0,7) && board.null_piece?(next_pos)
-        possible_moves << next_pos
+      if current_xcoord.between?(0,7) && current_ycoord.between?(0,7)
+        if board.null_piece?(next_pos) || board[next_pos].color != self.color
+          possible_moves << next_pos
+        end 
       else
         break
       end

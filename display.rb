@@ -24,7 +24,7 @@ class Display
 
         if pos == cursor_pos
           if @cursor.selected && !board.null_piece?(pos)
-            row << " #{piece.to_s.colorize(:blue)}"
+            row << " #{piece.to_s.colorize(:yellow)}"
           else
             row << " #{piece.to_s.colorize(piece.color)}"
           end
