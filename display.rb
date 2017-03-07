@@ -21,7 +21,11 @@ class Display
         pos = [row_idx, col_idx]
         piece = board[pos]
         if pos == cursor_pos
-          row << " #{piece.to_s.colorize(:blue)}"
+          if @cursor.selected && !piece.is_a?(NullPiece)
+            row << " #{piece.to_s.colorize(:blue)}"
+          else
+            row << " #{piece.to_s.colorize(piece.color)}"
+          end
         else
           row << " #{piece.to_s}"
         end
