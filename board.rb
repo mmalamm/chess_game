@@ -26,21 +26,21 @@ class Board
     board.each_with_index do |row, idx|
       next if idx.between?(2,5)
       row.each_index do |piece_idx|
-        # debugger
         row[piece_idx] = find_piece([idx, piece_idx])
-
       end
     end
   end
 
-  def find_piece(piece_idx)
+  def find_piece(pos)
     CHESS_PIECES.each do |piece, pos_array|
-      # debugger
-      if pos_array.include?(piece_idx)
-        # debugger
-        return piece.new
+      if pos_array.include?(pos)
+        return piece.new(:red, pos, self)
       end
     end
+  end
+
+  def null_piece?(pos)
+    self[pos].is_a?(NullPiece)
   end
 
   def []=(pos, value)

@@ -17,11 +17,13 @@ class Display
     puts "            "
     (0..7).each do |row_idx|
       row = "#{row_idx} "
+
       (0..7).each do |col_idx|
         pos = [row_idx, col_idx]
         piece = board[pos]
+
         if pos == cursor_pos
-          if @cursor.selected && !piece.is_a?(NullPiece)
+          if @cursor.selected && !board.null_piece?(pos)
             row << " #{piece.to_s.colorize(:blue)}"
           else
             row << " #{piece.to_s.colorize(piece.color)}"
@@ -30,9 +32,9 @@ class Display
           row << " #{piece.to_s}"
         end
       end
+
       puts row
     end
-    # board[cursor_pos].colorize(:blue)
   end
 
   def run
@@ -42,7 +44,24 @@ class Display
     end
   end
 
+  # def posit
+  #   (0..7).each do |row_idx|
+  #     (0..7).each do |col_idx|
+  #       pos = [row_idx, col_idx]
+  #       piece = board[pos]
+  #       puts "#{piece}:  #{piece.pos}"
+  #     end
+  #   end
+  # end
+
 end
 
 display = Display.new
-display.run
+display.render
+p "#{display.board[[0,4]]}: #{display.board[[0,4]].moves}"
+p "#{display.board[[0,6]]}: #{display.board[[0,6]].moves}"
+p "#{display.board[[0,0]]}: #{display.board[[0,0]].moves}"
+
+# display.run
+
+# display.posit
